@@ -70,6 +70,7 @@ if sys.argv[1] == '--debug':
     [print(len(i)) for i in final]
 
 else:
+    sys.stdout.write(": test\n")
     freqs = [nltk.FreqDist(i) for i in final]
     final = [[j[0] for j in i.most_common(50)] for i in freqs]
 
