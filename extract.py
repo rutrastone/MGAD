@@ -7,31 +7,51 @@ core = {}
 out = []
 
 
-template = """
-NOUN|Number=Plur    NOUN|Number=Sing
+template_hi = """
+NOUN|Number=Plur|Case=Nom   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Plur|Case=Acc   NOUN|Number=Sing|Case=Acc
+NOUN|Number=Sing|Case=Acc   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Plur|Case=Acc   NOUN|Number=Plur|Case=Nom
+VERB|Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part  VERB|Case=Nom|VerbForm=Inf
+VERB|Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part|Person=3  VERB|Case=Nom|VerbForm=Inf
+VERB|VerbForm=Conv  VERB|Case=Nom|VerbForm=Inf
+VERB|Case=Acc|VerbForm=Inf  VERB|Case=Nom|VerbForm=Inf
+VERB|Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part  VERB|Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part|Person=3
+VERB|Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part  VERB|VerbForm=Conv
+VERB|Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part|Person=3  VERB|VerbForm=Conv
 """
 
 template_ar = """
-NOUN|Number=Plur|Case=Nom|Definite=Ind   NOUN|Number=Sing|Case=Nom|Definite=Ind
-NOUN|Number=Plur|Case=Acc|Definite=Ind   NOUN|Number=Sing|Case=Acc|Definite=Ind
-NOUN|Number=Plur|Case=Gen|Definite=Ind   NOUN|Number=Sing|Case=Gen|Definite=Ind
-NOUN|Number=Sing|Case=Acc|Definite=Ind   NOUN|Number=Sing|Case=Nom|Definite=Ind
-NOUN|Number=Sing|Case=Gen|Definite=Ind   NOUN|Number=Sing|Case=Nom|Definite=Ind
-NOUN|Number=Sing|Case=Gen|Definite=Ind   NOUN|Number=Sing|Case=Acc|Definite=Ind
+NOUN|Number=Plur|Case=Nom|Definite=Ind  NOUN|Number=Sing|Case=Nom|Definite=Ind
 VERB|Aspect=Imp|Gender=Masc|Person=3|Number=Sing    VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Sing
+VERB|Aspect=Perf|Gender=Fem|Person=3|Number=Sing    VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Sing
+VERB|Aspect=Imp|Gender=Fem|Person=3|Number=Sing    VERB|Aspect=Imp|Gender=Fem|Person=3|Number=Sing
 VERB|Aspect=Imp|Gender=Masc|Person=3|Number=Plur    VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Plur
+VERB|Aspect=Imp|Gender=Fem|Person=3|Number=Plur    VERB|Aspect=Perf|Gender=Fem|Person=3|Number=Plur
 VERB|Aspect=Imp|Gender=Masc|Person=3|Number=Sing    VERB|Aspect=Imp|Gender=Masc|Person=3|Number=Plur
 VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Sing   VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Plur
 """
 
 template_ru = """
+NOUN|Number=Sing|Case=Acc   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Sing|Case=Dat   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Sing|Case=Gen   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Sing|Case=Loc   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Sing|Case=Ins   NOUN|Number=Sing|Case=Nom
 NOUN|Number=Plur|Case=Nom   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Plur|Case=Dat   NOUN|Number=Sing|Case=Dat
+NOUN|Number=Plur|Case=Gen   NOUN|Number=Sing|Case=Gen
+NOUN|Number=Plur|Case=Loc   NOUN|Number=Sing|Case=Loc
+NOUN|Number=Plur|Case=Ins   NOUN|Number=Sing|Case=Ins
 VERB|Person=3|Number=Sing|Tense=Pres    VERB|Aspect=Imp|VerbForm=Inf
 VERB|VerbForm=Part|Number=Sing|Case=Nom|Tense=Past|Gender=Masc  VERB|Aspect=Imp|VerbForm=Inf
 VERB|Number=Sing|Tense=Past|Gender=Masc VERB|Aspect=Imp|VerbForm=Inf
 VERB|Person=3|Number=Sing|Tense=Pres    VERB|VerbForm=Part|Number=Sing|Case=Nom|Tense=Past|Gender=Masc
 VERB|Person=3|Number=Sing|Tense=Pres    VERB|Number=Sing|Tense=Past|Gender=Masc
 VERB|VerbForm=Part|Number=Sing|Case=Nom|Tense=Past|Gender=Masc  VERB|Number=Sing|Tense=Past|Gender=Masc
+VERB|VerbForm=Conv|Aspect=Imp   VERB|Aspect=Imp|VerbForm=Inf
+VERB|VerbForm=Conv|Aspect=Perf  VERB|Aspect=Imp|VerbForm=Inf
+VERB|VerbForm=Conv|Aspect=Perf  VERB|VerbForm=Conv|Aspect=Imp
 """
 
 template = template_ar
@@ -73,8 +93,8 @@ for line in lines:
 
     try:
         cols = line.split("\t")
-        word = cols[1]
-        lemma = cols[2] 
+        word = cols[1].lower()
+        lemma = cols[2].lower()
         pos = cols[3]
         feats = cols[5]
     except:
