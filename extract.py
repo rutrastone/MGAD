@@ -4,7 +4,7 @@ from itertools import product
 
 # core
 core = {}
-out = []
+nom, verb = [], []
 
 
 template_hi = """
@@ -54,7 +54,7 @@ VERB|VerbForm=Conv|Aspect=Perf  VERB|Aspect=Imp|VerbForm=Inf
 VERB|VerbForm=Conv|Aspect=Perf  VERB|VerbForm=Conv|Aspect=Imp
 """
 
-template = template_ar
+template = template_hi
 
 def check_tags(s, tags, disallow=[]):
     out = True
@@ -110,22 +110,34 @@ for line in template.split("\n"):
     if line == "":
         continue
     x, y = line.split()
-    out.append(build_deriv(core[x], core[y]))    
-
+    if x.startswith("NOUN"):
+        nom.append(build_deriv(core[x], core[y]))    
+    if x.startswith("VERB"):
+        verb.append(build_deriv(core[x], core[y]))
  
 if sys.argv[1] == '--debug':
-    [print(len(i)) for i in out]
+    [print(len(i)) for i in nom + verb]
 
 else:
     sys.stdout.write(": test\n")
-    freqs = [nltk.FreqDist(i) for i in out]
-    out = [[j[0] for j in i.most_common(50)] for i in freqs]
+    n_freqs = [nltk.FreqDist(i) for i in nom]
+    n_out = [[j[0] for j in i.most_common(50)] for i in n_freqs]
+    v_freqs = [nltk.FreqDist(i) for i in verb]
+    v_out = [[j[0] for j in i.most_common(50)] for i in v_freqs]
 
-    for I in out:
+    sys.stdout.write(": nom\n")
+    for I in n_out:
+        for i in product(I, I):
+            sys.stdout.write("{} {} {} {}\n".format(i[0][0], i[0][1], i[1][0],
+                                                    i[1][1]))
+
+    sys.stdout.write(": verb\n")
+    for I in v_out:
         for i in product(I, I):
             sys.stdout.write("{} {} {} {}\n".format(i[0][0], i[0][1], i[1][0],
                                                     i[1][1]))
    
+
 '''
     # regular plurals
     if pos == 'NOUN' and check_tags(feats, ['Plur', 'Nom', 'Definite=Ind']):
