@@ -7,8 +7,10 @@ We present a novel, minimally supervised method of generating word embedding eva
 ### Usage
 Prior to running `extract.py`, it is recommended that a feature template for generating synactic analogies be provided. The following is a sample template written for Hindi:
 
-`NOUN|Number=Plur|Case=Nom   NOUN|Number=Sing|Case=Nom
-VERB|Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part  VERB|Case=Nom|VerbForm=Inf`
+```
+NOUN|Number=Plur|Case=Nom   NOUN|Number=Sing|Case=Nom
+VERB|Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part  VERB|Case=Nom|VerbForm=Inf
+```
 
 The features expressed here can be found at [the Universal Dependencies website](http://universaldependencies.org/u/feat/index.html). 
 
