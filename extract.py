@@ -54,7 +54,11 @@ VERB|VerbForm=Conv|Aspect=Perf  VERB|Aspect=Imp|VerbForm=Inf
 VERB|VerbForm=Conv|Aspect=Perf  VERB|VerbForm=Conv|Aspect=Imp
 """
 
+
 template = template_hi
+with open(sys.argv[1]) as f:
+	template = f.read()
+
 
 def check_tags(s, tags, disallow=[]):
     out = True
@@ -115,57 +119,53 @@ for line in template.split("\n"):
     if x.startswith("VERB"):
         verb.append(build_deriv(core[x], core[y]))
  
-if sys.argv[1] == '--debug':
-    [print(len(i)) for i in nom + verb]
+sys.stdout.write(": test\n")
+n_freqs = [nltk.FreqDist(i) for i in nom]
+n_out = [[j[0] for j in i.most_common(50)] for i in n_freqs]
+v_freqs = [nltk.FreqDist(i) for i in verb]
+v_out = [[j[0] for j in i.most_common(50)] for i in v_freqs]
 
-else:
-    sys.stdout.write(": test\n")
-    n_freqs = [nltk.FreqDist(i) for i in nom]
-    n_out = [[j[0] for j in i.most_common(50)] for i in n_freqs]
-    v_freqs = [nltk.FreqDist(i) for i in verb]
-    v_out = [[j[0] for j in i.most_common(50)] for i in v_freqs]
+sys.stdout.write(": nom\n")
+for I in n_out:
+	for i in product(I, I):
+	    sys.stdout.write("{} {} {} {}\n".format(i[0][0], i[0][1], i[1][0],
+						    i[1][1]))
 
-    sys.stdout.write(": nom\n")
-    for I in n_out:
-        for i in product(I, I):
-            sys.stdout.write("{} {} {} {}\n".format(i[0][0], i[0][1], i[1][0],
-                                                    i[1][1]))
+sys.stdout.write(": verb\n")
+for I in v_out:
+	for i in product(I, I):
+	    sys.stdout.write("{} {} {} {}\n".format(i[0][0], i[0][1], i[1][0],
+						    i[1][1]))
 
-    sys.stdout.write(": verb\n")
-    for I in v_out:
-        for i in product(I, I):
-            sys.stdout.write("{} {} {} {}\n".format(i[0][0], i[0][1], i[1][0],
-                                                    i[1][1]))
-   
 
 '''
-    # regular plurals
-    if pos == 'NOUN' and check_tags(feats, ['Plur', 'Nom', 'Definite=Ind']):
-        I01.append((cols[2], w))
+# regular plurals
+if pos == 'NOUN' and check_tags(feats, ['Plur', 'Nom', 'Definite=Ind']):
+I01.append((cols[2], w))
 
-    # acc
-    if pos == 'NOUN' and check_tags(feats, ['Sing', 'Acc', 'Definite=Ind']):
-        I02.append((cols[2], w))
+# acc
+if pos == 'NOUN' and check_tags(feats, ['Sing', 'Acc', 'Definite=Ind']):
+I02.append((cols[2], w))
 
-    # gen
-    if pos == 'NOUN' and check_tags(feats, ['Sing', 'Gen', 'Definite=Ind']):
-        I03.append((cols[2], w))
+# gen
+if pos == 'NOUN' and check_tags(feats, ['Sing', 'Gen', 'Definite=Ind']):
+I03.append((cols[2], w))
 
-    # +3MSg+Impf : +3MSg+Perf
-    if pos == 'VERB' and check_tags(feats, ['Aspect=Imp', 'Gender=Masc',
-                                            'Person=3', 'Number=Sing',
-                                            'VerbForm=Fin'], ['Mood']):
-        I04.append((cols[2], w))
+# +3MSg+Impf : +3MSg+Perf
+if pos == 'VERB' and check_tags(feats, ['Aspect=Imp', 'Gender=Masc',
+				    'Person=3', 'Number=Sing',
+				    'VerbForm=Fin'], ['Mood']):
+I04.append((cols[2], w))
 
-    # +3MPl+Impf : 
-    if pos == 'VERB' and check_tags(feats, ['Aspect=Imp', 'Masc',
-                                            'VerbForm=Part', 'Sing',
-                                            'Person=3']):
-        I06.append((cols[2], w))
+# +3MPl+Impf : 
+if pos == 'VERB' and check_tags(feats, ['Aspect=Imp', 'Masc',
+				    'VerbForm=Part', 'Sing',
+				    'Person=3']):
+I06.append((cols[2], w))
 
-    # past
-    if pos == 'VERB' and check_tags(feats, ['VerbForm=Conv']):
-        I07.append((cols[2], w))
+# past
+if pos == 'VERB' and check_tags(feats, ['VerbForm=Conv']):
+I07.append((cols[2], w))
 
 build_deriv(I08, I06, I05)
 build_deriv(I09, I06, I07)

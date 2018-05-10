@@ -1,0 +1,8 @@
+NOUN|Number=Plur|Case=Nom|Definite=Ind  NOUN|Number=Sing|Case=Nom|Definite=Ind
+VERB|Aspect=Imp|Gender=Masc|Person=3|Number=Sing    VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Sing
+VERB|Aspect=Perf|Gender=Fem|Person=3|Number=Sing    VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Sing
+VERB|Aspect=Imp|Gender=Fem|Person=3|Number=Sing    VERB|Aspect=Imp|Gender=Fem|Person=3|Number=Sing
+VERB|Aspect=Imp|Gender=Masc|Person=3|Number=Plur    VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Plur
+VERB|Aspect=Imp|Gender=Fem|Person=3|Number=Plur    VERB|Aspect=Perf|Gender=Fem|Person=3|Number=Plur
+VERB|Aspect=Imp|Gender=Masc|Person=3|Number=Sing    VERB|Aspect=Imp|Gender=Masc|Person=3|Number=Plur
+VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Sing   VERB|Aspect=Perf|Gender=Masc|Person=3|Number=Plur

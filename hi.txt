@@ -1,0 +1,11 @@
+NOUN|Number=Plur|Case=Nom   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Plur|Case=Acc   NOUN|Number=Sing|Case=Acc
+NOUN|Number=Sing|Case=Acc   NOUN|Number=Sing|Case=Nom
+NOUN|Number=Plur|Case=Acc   NOUN|Number=Plur|Case=Nom
+VERB|Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part  VERB|Case=Nom|VerbForm=Inf
+VERB|Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part|Person=3  VERB|Case=Nom|VerbForm=Inf
+VERB|VerbForm=Conv  VERB|Case=Nom|VerbForm=Inf
+VERB|Case=Acc|VerbForm=Inf  VERB|Case=Nom|VerbForm=Inf
+VERB|Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part  VERB|Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part|Person=3
+VERB|Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part  VERB|VerbForm=Conv
+VERB|Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part|Person=3  VERB|VerbForm=Conv
